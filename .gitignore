@@ -1,0 +1,18 @@
+# Build outputs
+build/
+
+# Dart tool cache
+.dart_tool/
+
+# Test coverage
+coverage/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.code-workspace
+
+# OS files
+.DS_Store
+Thumbs.db

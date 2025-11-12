@@ -1,0 +1,39 @@
+name: voivi_voice_ai
+description: "Real-time voice AI assistant SDK for Flutter. Build voice-powered apps with AI assistants, tool execution, and WebSocket streaming. No UI dependencies - integrate with any framework."
+version: 1.2.0
+homepage: https://github.com/voivihq/voivi_voice_ai
+repository: https://github.com/voivihq/voivi_voice_ai
+documentation: https://github.com/voivihq/voivi_voice_ai#readme
+issue_tracker: https://github.com/voivihq/voivi_voice_ai/issues
+
+topics:
+  - voice
+  - ai
+  - assistant
+  - speech
+  - websocket
+  - real-time
+  - conversational-ai
+  - voice-bot
+  - voice-assistant
+  - voivi
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  # Core WebSocket communication
+  web_socket_channel: ^3.0.1
+
+  # HTTP client for REST API
+  http: ^1.2.0
+  dio: ^5.9.0
+
+  # Utilities for validation and error handling
+  meta: ^1.9.1
+
+dev_dependencies:
+  test: ^1.24.3
+  lints: ^3.0.0
+  mockito: ^5.4.2
+  build_runner: ^2.4.7
