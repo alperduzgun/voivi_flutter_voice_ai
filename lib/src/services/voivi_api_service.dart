@@ -65,15 +65,43 @@ class VoiviApiService {
       );
 
       developer.log('📡 Response status: ${response.statusCode}');
+      developer.log('📄 Response body: ${response.body.substring(0, response.body.length > 500 ? 500 : response.body.length)}...');
 
       if (response.statusCode == 200) {
-        final data = json.decode(response.body) as List;
-        final assistants = data
-            .map(
-                (json) => AssistantModel.fromJson(json as Map<String, dynamic>))
-            .toList();
+        final decoded = json.decode(response.body);
+        developer.log('📦 Response type: ${decoded.runtimeType}');
 
-        developer.log('✅ Loaded ${assistants.length} assistants');
+        // Handle both List and Map responses
+        List<dynamic> data;
+        if (decoded is List) {
+          data = decoded;
+          developer.log('✅ Got List response with ${data.length} items');
+        } else if (decoded is Map<String, dynamic>) {
+          // Handle wrapped response like {"assistants": [...]}
+          data = decoded['assistants'] as List? ??
+                 decoded['data'] as List? ??
+                 [];
+          developer.log('✅ Got Map response, extracted ${data.length} items');
+        } else {
+          throw Exception('Unexpected response format: ${decoded.runtimeType}');
+        }
+
+        developer.log('🔄 Parsing ${data.length} assistants...');
+        final assistants = <AssistantModel>[];
+        for (var i = 0; i < data.length; i++) {
+          try {
+            final item = data[i];
+            developer.log('  [$i] Parsing: ${item.runtimeType}');
+            final assistant = AssistantModel.fromJson(item as Map<String, dynamic>);
+            assistants.add(assistant);
+          } catch (e, stackTrace) {
+            developer.log('  [$i] ❌ Error parsing assistant: $e');
+            developer.log('  [$i] StackTrace: $stackTrace');
+            // Continue with other assistants
+          }
+        }
+
+        developer.log('✅ Successfully loaded ${assistants.length} assistants');
         return assistants;
       } else {
         final errorMessage =

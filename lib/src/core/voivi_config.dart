@@ -633,12 +633,27 @@ class AssistantModel {
     this.description,
     this.firstMessage,
     this.endCallMessage,
+    this.toolIds,
     this.metadata,
     this.createdAt,
     this.updatedAt,
   });
 
   factory AssistantModel.fromJson(Map<String, dynamic> json) {
+    // Parse toolIds from model.toolIds path
+    List<String>? toolIds;
+    try {
+      if (json['model'] != null && json['model']['toolIds'] != null) {
+        final toolIdsData = json['model']['toolIds'];
+        if (toolIdsData is List) {
+          toolIds = toolIdsData.map((e) => e.toString()).toList();
+        }
+      }
+    } catch (e) {
+      // Silently ignore toolIds parsing errors
+      toolIds = null;
+    }
+
     return AssistantModel(
       id: json['id'] as String,
       name: json['name'] as String? ?? json['Name'] as String,
@@ -648,6 +663,7 @@ class AssistantModel {
           json['FirstMessage'] as String?,
       endCallMessage: json['endCallMessage'] as String? ??
           json['EndCallMessage'] as String?,
+      toolIds: toolIds,
       metadata: json['metadata'] as Map<String, dynamic>? ??
           json['Metadata'] as Map<String, dynamic>?,
       createdAt: json['createdAt'] != null
@@ -668,6 +684,7 @@ class AssistantModel {
   final String? description;
   final String? firstMessage;
   final String? endCallMessage;
+  final List<String>? toolIds;
   final Map<String, dynamic>? metadata;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -678,6 +695,7 @@ class AssistantModel {
     String? description,
     String? firstMessage,
     String? endCallMessage,
+    List<String>? toolIds,
     Map<String, dynamic>? metadata,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -688,6 +706,7 @@ class AssistantModel {
       description: description ?? this.description,
       firstMessage: firstMessage ?? this.firstMessage,
       endCallMessage: endCallMessage ?? this.endCallMessage,
+      toolIds: toolIds ?? this.toolIds,
       metadata: metadata ?? this.metadata,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
@@ -700,6 +719,7 @@ class AssistantModel {
         if (description != null) 'description': description,
         if (firstMessage != null) 'firstMessage': firstMessage,
         if (endCallMessage != null) 'endCallMessage': endCallMessage,
+        if (toolIds != null) 'toolIds': toolIds,
         if (metadata != null) 'metadata': metadata,
         if (createdAt != null) 'createdAt': createdAt!.toIso8601String(),
         if (updatedAt != null) 'updatedAt': updatedAt!.toIso8601String(),

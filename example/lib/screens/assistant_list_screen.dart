@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:voivi_voice_ai/voivi_chat.dart';
 import '../services/config_service.dart';
 
@@ -233,6 +234,27 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                   ),
                 ),
               ],
+              if (assistant.toolIds != null && assistant.toolIds!.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.build_circle,
+                      size: 16,
+                      color: Color(0xFF6C63FF),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      '${assistant.toolIds!.length} Tools',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF6C63FF),
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ],
           ),
         ),
@@ -275,6 +297,8 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                 _buildDetailItem('First Message', assistant.firstMessage!),
               if (assistant.endCallMessage != null)
                 _buildDetailItem('End Call Message', assistant.endCallMessage!),
+              if (assistant.toolIds != null && assistant.toolIds!.isNotEmpty)
+                _buildToolIdsSection(assistant.toolIds!),
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
@@ -313,6 +337,121 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
           Text(
             value,
             style: const TextStyle(fontSize: 14),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildToolIdsSection(List<String> toolIds) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              const Text(
+                'Tools',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6C63FF).withValues(alpha: 0.2),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  '${toolIds.length}',
+                  style: const TextStyle(
+                    fontSize: 11,
+                    color: Color(0xFF6C63FF),
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: const Color(0xFF0F3460),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: const Color(0xFF6C63FF).withValues(alpha: 0.3),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: toolIds.asMap().entries.map((entry) {
+                final index = entry.key;
+                final toolId = entry.value;
+                return Padding(
+                  padding: EdgeInsets.only(
+                    bottom: index < toolIds.length - 1 ? 8 : 0,
+                  ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 20,
+                        height: 20,
+                        decoration: BoxDecoration(
+                          color: const Color(0xFF6C63FF).withValues(alpha: 0.2),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Center(
+                          child: Text(
+                            '${index + 1}',
+                            style: const TextStyle(
+                              fontSize: 11,
+                              color: Color(0xFF6C63FF),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: SelectableText(
+                          toolId,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontFamily: 'monospace',
+                          ),
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.copy,
+                          size: 16,
+                          color: Color(0xFF6C63FF),
+                        ),
+                        onPressed: () {
+                          // Copy to clipboard
+                          Clipboard.setData(ClipboardData(text: toolId));
+                          // Show snackbar
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Copied: ${toolId.substring(0, 8)}...'),
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
+                        },
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                    ],
+                  ),
+                );
+              }).toList(),
+            ),
           ),
         ],
       ),
