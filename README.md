@@ -1,19 +1,30 @@
 # Voivi Voice AI SDK
 
+**Complete Conversation AI Kit for Flutter** 🤖
+
 [![pub package](https://img.shields.io/pub/v/voivi_voice_ai.svg)](https://pub.dev/packages/voivi_voice_ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A real-time voice AI assistant SDK for Flutter. Build voice-powered applications with AI assistants, tool execution, and WebSocket streaming. **No UI dependencies** - integrate with any framework or platform.
+Build intelligent **conversation AI** experiences with voice, text, and multi-modal interactions. The most comprehensive **conversation AI SDK** for Flutter developers - enabling real-time voice conversations, text chat, AI-powered assistants, and seamless platform integration. **No UI dependencies** - works with any framework or platform.
 
 ## ✨ Features
 
-- 🎤 **Voice AI Assistants**: Real-time voice-powered AI conversations
+### 🧠 Conversation AI Core
+- 🤖 **Conversation AI Platform**: Build intelligent conversation AI applications with voice, text, and multi-modal interactions
+- 🎙️ **Voice Conversation AI**: Real-time voice-powered conversations with AI assistants
+- 💬 **Text Conversation AI**: Intelligent text-based chatbots and AI assistants
+- 🔀 **Multi-Modal Conversation AI**: Seamless switching between voice and text conversations
+
+### 🚀 Advanced Capabilities
+- 🗣️ **Speech-to-Text (STT)**: Transcribe audio with speaker diarization & customer detection
 - 🚀 **Pure Engine**: No Flutter or UI dependencies - works with any Dart environment
 - 💬 **WebSocket Streaming**: Real-time bidirectional communication with AI assistants
 - 🤖 **Assistant Management**: List, fetch, and manage AI assistants via REST API
 - 🛠️ **Tool Execution**: Client-side tool execution (geolocation, device info, etc.)
 - 📝 **AI Text Summarization**: Summarize any text with GPT-4o-mini
 - 💰 **Cost Estimation**: Pre-flight cost calculation for AI operations
+
+### 🔧 Developer Experience
 - 🔧 **Framework Agnostic**: Use with Flutter, Angular Dart, console apps, or any Dart project
 - 📱 **Cross-Platform**: Works on all Dart platforms (mobile, web, desktop, server)
 - 🔄 **Auto-Reconnection**: Automatic connection retry with configurable settings
@@ -45,6 +56,67 @@ Before using the package, you'll need to get your credentials from the Voivi Das
 ⚠️ **Security Note**: Never commit credentials to version control. Use environment variables or secure configuration files.
 
 ## 🚀 Quick Start
+
+### 🎯 Simplified API Usage (v1.3.1+)
+
+VoiviApiService now supports optional config-based initialization, eliminating the need to pass `baseUrl` and `apiKey` to every API call.
+
+#### Before (Repetitive):
+```dart
+final apiService = VoiviApiService();
+
+// Have to pass credentials every time 😞
+await apiService.transcribeAudio(
+  baseUrl: 'http://localhost:5065',
+  request: sttRequest,
+  apiKey: 'your-api-key',
+);
+
+await apiService.listAssistants(
+  baseUrl: 'http://localhost:5065',
+  apiKey: 'your-api-key',
+  organizationId: 'org-123',
+);
+```
+
+#### After (Clean):
+```dart
+// Configure once with VoiviConfig
+final config = VoiviConfig(
+  baseUrl: 'http://localhost:5065',
+  apiKey: 'your-api-key',
+  organizationId: 'org-123',
+  assistantId: 'ast-456',
+);
+
+final apiService = VoiviApiService(config: config);
+
+// Use everywhere without repeating credentials 🎉
+await apiService.transcribeAudio(request: sttRequest);
+await apiService.listAssistants();
+await apiService.generateSummaries(request: summaryRequest);
+```
+
+#### Override When Needed:
+```dart
+// Use config defaults
+await apiService.transcribeAudio(request: request);
+
+// Override with different baseUrl for specific call
+await apiService.transcribeAudio(
+  baseUrl: 'http://different-server:5065',
+  request: request,
+);
+```
+
+#### Benefits:
+- ✅ **DRY Principle**: Set credentials once, use everywhere
+- ✅ **Less Boilerplate**: Cleaner, more readable code
+- ✅ **Fully Backward Compatible**: Old code continues to work
+- ✅ **Flexible**: Override config parameters when needed
+- ✅ **SOLID**: Single source of truth for configuration
+
+All examples below have been updated to use this simplified pattern!
 
 ### Configuration Patterns
 
@@ -1075,6 +1147,348 @@ final docRequest = SummarizeTextRequest(
 );
 ```
 
+## 🎤 Speech-to-Text (STT) API
+
+The package provides comprehensive speech-to-text transcription capabilities with advanced features like speaker diarization, customer detection, and word-level timings.
+
+### Basic Audio Transcription
+
+```dart
+import 'dart:io';
+import 'package:voivi_voice_ai/voivi_chat.dart';
+
+final apiService = VoiviApiService();
+
+// Create transcription request
+final request = STTTranscribeRequest(
+  audioFile: File('/path/to/audio.wav'),
+  language: 'tr-TR',
+);
+
+// Transcribe audio
+final response = await apiService.transcribeAudio(
+  baseUrl: 'http://localhost:5065',
+  request: request,
+  apiKey: 'your-api-key',
+);
+
+print('Transcription: ${response.text}');
+print('Duration: ${response.duration.toStringAsFixed(2)}s');
+print('Confidence: ${(response.confidence * 100).toStringAsFixed(1)}%');
+print('Cost: \$${response.audioProcessingCost.toStringAsFixed(6)}');
+```
+
+### Speaker Diarization
+
+Identify and separate different speakers in audio:
+
+```dart
+// Enable speaker diarization
+final request = STTTranscribeRequest(
+  audioFile: audioFile,
+  language: 'tr-TR',
+  enableDiarization: true,
+  minSpeakers: 2,
+  maxSpeakers: 8,
+);
+
+final response = await apiService.transcribeAudio(
+  baseUrl: 'http://localhost:5065',
+  request: request,
+  apiKey: 'your-api-key',
+);
+
+// Process speaker segments
+print('Detected ${response.speakerCount} speakers');
+
+for (final segment in response.speakerSegments ?? []) {
+  print('${segment.speakerId} (${segment.startTimeSeconds.toStringAsFixed(1)}s - ${segment.endTimeSeconds.toStringAsFixed(1)}s):');
+  print('  ${segment.text}');
+  print('  Confidence: ${(segment.confidence * 100).toStringAsFixed(1)}%');
+}
+```
+
+### Customer Detection
+
+Automatically identify the primary customer in conversations:
+
+```dart
+// Enable customer detection
+final request = STTTranscribeRequest(
+  audioFile: audioFile,
+  language: 'tr-TR',
+  enableCustomerDetection: true,
+);
+
+final response = await apiService.transcribeAudio(
+  baseUrl: 'http://localhost:5065',
+  request: request,
+  apiKey: 'your-api-key',
+);
+
+if (response.primaryCustomerId != null) {
+  print('Primary customer: ${response.primaryCustomerId}');
+
+  // Filter customer segments
+  final customerSegments = response.speakerSegments
+      ?.where((s) => s.speakerId == response.primaryCustomerId)
+      .toList();
+
+  print('Customer said:');
+  for (final segment in customerSegments ?? []) {
+    print('  ${segment.text}');
+  }
+}
+```
+
+### Word-Level Timings
+
+Get precise timing information for each word:
+
+```dart
+// Enable word-level timings
+final request = STTTranscribeRequest(
+  audioFile: audioFile,
+  language: 'tr-TR',
+  enableDiarization: true,
+  includeWordTimings: true,
+);
+
+final response = await apiService.transcribeAudio(
+  baseUrl: 'http://localhost:5065',
+  request: request,
+  apiKey: 'your-api-key',
+);
+
+// Access word timings
+for (final segment in response.speakerSegments ?? []) {
+  if (segment.wordTimings != null) {
+    for (final word in segment.wordTimings!) {
+      print('${word.word}: ${word.startTimeSeconds}s - ${word.endTimeSeconds}s');
+    }
+  }
+}
+```
+
+### Advanced STT Features
+
+```dart
+// Full-featured transcription
+final request = STTTranscribeRequest(
+  audioFile: audioFile,
+  language: 'tr-TR',
+  modelId: 'azure-speech-1',
+  enableDiarization: true,
+  enableCustomerDetection: true,
+  includeWordTimings: true,
+  minSpeakers: 2,
+  maxSpeakers: 5,
+);
+
+final response = await apiService.transcribeAudio(
+  baseUrl: 'http://localhost:5065',
+  request: request,
+  apiKey: 'your-api-key',
+);
+
+// Access comprehensive results
+print('Full transcript: ${response.text}');
+print('Language: ${response.language}');
+print('Duration: ${response.duration}s');
+print('Confidence: ${response.confidence}');
+print('Provider: ${response.provider}');
+print('Speakers: ${response.speakerCount}');
+print('Cost: \$${response.audioProcessingCost}');
+
+// Audio metadata
+if (response.audioInfo != null) {
+  final info = response.audioInfo!;
+  print('\nAudio Info:');
+  print('  Format: ${info.format}');
+  print('  Size: ${info.fileSizeMB} MB');
+  print('  Sample Rate: ${info.sampleRate} Hz');
+  print('  Channels: ${info.channels}');
+  print('  Bit Depth: ${info.bitDepth}-bit');
+}
+```
+
+### STT Model Management
+
+```dart
+// List available models
+final models = await apiService.getAvailableSTTModels(
+  baseUrl: 'http://localhost:5065',
+  apiKey: 'your-api-key',
+);
+print('Available models: $models');
+
+// Get model information
+final modelInfo = await apiService.getSTTModelInfo(
+  baseUrl: 'http://localhost:5065',
+  modelId: 'azure-speech-1',
+  apiKey: 'your-api-key',
+);
+print('Model: ${modelInfo.name}');
+print('Provider: ${modelInfo.provider}');
+
+// Get supported languages
+final languages = await apiService.getSupportedLanguages(
+  baseUrl: 'http://localhost:5065',
+  modelId: 'azure-speech-1',
+  apiKey: 'your-api-key',
+);
+print('Supported languages: $languages');
+
+// Get supported formats
+final formats = await apiService.getSupportedFormats(
+  baseUrl: 'http://localhost:5065',
+  modelId: 'azure-speech-1',
+  apiKey: 'your-api-key',
+);
+print('Supported formats: $formats');
+
+// Health check
+final isHealthy = await apiService.sttHealthCheck(
+  baseUrl: 'http://localhost:5065',
+  apiKey: 'your-api-key',
+);
+print('STT service healthy: $isHealthy');
+```
+
+### STT Security & Validation
+
+The SDK includes comprehensive security features:
+
+```dart
+// File validation before upload
+final request = STTTranscribeRequest(
+  audioFile: audioFile,
+  language: 'tr-TR',
+);
+
+try {
+  // Automatic validation checks:
+  // ✅ File exists
+  // ✅ File size (max 100MB)
+  // ✅ File format (WAV, MP3, M4A, WEBM, OGG, FLAC)
+  // ✅ File is not empty
+  await request.validate();
+
+  final response = await apiService.transcribeAudio(
+    baseUrl: 'http://localhost:5065',
+    request: request,
+    apiKey: 'your-api-key',
+  );
+} on ArgumentError catch (e) {
+  // Handle validation errors
+  print('Validation error: ${e.message}');
+} catch (e) {
+  // Handle other errors
+  print('Transcription error: $e');
+}
+```
+
+### STT Features
+
+- ✅ **Multi-Format Support**: WAV, MP3, M4A, WEBM, OGG, FLAC
+- 🗣️ **Speaker Diarization**: Identify and separate different speakers
+- 👤 **Customer Detection**: Automatically detect primary customer voice
+- ⏱️ **Word-Level Timings**: Precise timestamp for each word
+- 🌍 **Multi-Language**: Turkish, English, and 100+ languages
+- 💰 **Cost Tracking**: Real-time cost calculation
+- 🔐 **Dual Authentication**: API Key or Bearer Token
+- 📊 **Audio Metadata**: Format, sample rate, channels, bit depth
+- 🛡️ **Security**: File validation, size limits, format restrictions
+- 🎯 **High Accuracy**: Azure Speech SDK powered
+- ⚡ **Fast Processing**: Average 1-3s per audio file
+- 🔄 **Idempotency**: Cache-based duplicate request prevention
+
+### STT Technical Details
+
+| Feature | Specification |
+|---------|--------------|
+| **Supported Formats** | WAV, MP3, M4A, WEBM, OGG, FLAC |
+| **Max File Size** | 100 MB |
+| **Language Support** | Turkish, English, 100+ languages |
+| **Processing Time** | 1-3 seconds average |
+| **Provider** | Azure Speech SDK |
+| **Diarization** | 2-8 speakers optimal |
+| **Security** | Input sanitization, path traversal protection |
+| **Architecture** | SOLID principles, immutable models |
+
+### STT Pricing
+
+| Type | Cost |
+|------|------|
+| Standard transcription | $0.016 / minute |
+| With diarization | $0.016 / minute |
+| Average 1-minute audio | ~$0.016 |
+| Average 5-minute audio | ~$0.080 |
+
+### STT Error Handling
+
+```dart
+try {
+  final response = await apiService.transcribeAudio(
+    baseUrl: 'http://localhost:5065',
+    request: request,
+    apiKey: 'your-api-key',
+  );
+} on ArgumentError catch (e) {
+  // Invalid input (file size, format, etc.)
+  print('Invalid input: ${e.message}');
+} on TimeoutException catch (e) {
+  // Request timed out (30s default)
+  print('Request timed out: $e');
+} catch (e) {
+  // Other errors (network, authentication, etc.)
+  if (e.toString().contains('Unauthorized')) {
+    print('Authentication failed: Check API key');
+  } else if (e.toString().contains('413')) {
+    print('File too large: Exceeds 100MB limit');
+  } else if (e.toString().contains('415')) {
+    print('Unsupported format: Use WAV, MP3, M4A, etc.');
+  } else {
+    print('Transcription error: $e');
+  }
+}
+```
+
+### STT Use Cases
+
+**Call Center Transcription**
+```dart
+// Transcribe customer support calls
+final request = STTTranscribeRequest(
+  audioFile: callRecording,
+  language: 'tr-TR',
+  enableDiarization: true,
+  enableCustomerDetection: true,
+);
+```
+
+**Meeting Transcription**
+```dart
+// Transcribe meetings with multiple participants
+final request = STTTranscribeRequest(
+  audioFile: meetingAudio,
+  language: 'en-US',
+  enableDiarization: true,
+  minSpeakers: 3,
+  maxSpeakers: 10,
+  includeWordTimings: true,
+);
+```
+
+**Voice Note Transcription**
+```dart
+// Transcribe simple voice notes
+final request = STTTranscribeRequest(
+  audioFile: voiceNote,
+  language: 'tr-TR',
+);
+```
+
 ## 🤖 AI-Powered Call Summary Generation
 
 The package includes batch AI summary generation for call transcripts using GPT-4o-mini.
@@ -1288,4 +1702,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made with ❤️ by the Voivi Team**
+## 🔍 Keywords & Search Terms
+
+**Conversation AI Development**: Build production-ready conversation AI applications with this comprehensive Flutter SDK. Perfect for developers looking to implement voice conversation AI, text conversation AI, or multi-modal conversation AI experiences.
+
+**Core Technologies**: conversation ai, conversational ai, flutter conversation ai, conversation ai kit, conversation ai sdk, conversation ai framework, flutter ai conversation, ai conversation platform, multimodal conversation ai, voice conversation ai, text conversation ai
+
+**Features**: speech to text flutter, text to speech flutter, flutter chatbot, flutter ai assistant, flutter voice assistant, ai chat sdk, conversation platform, gpt-4 flutter, azure speech flutter, openai whisper flutter, flutter websocket streaming, real-time ai chat
+
+**Use Cases**: customer support ai, voice assistant flutter, ai chatbot development, conversation ai platform, intelligent conversation, multi-turn dialogue, context-aware chat, ai voice chat, flutter voice chat, conversation history, sentiment analysis
+
+---
+
+**Made with ❤️ by the Voivi Team** | Building the future of **conversation AI** in Flutter

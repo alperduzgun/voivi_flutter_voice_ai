@@ -1,22 +1,26 @@
 name: voivi_voice_ai
-description: "Real-time voice AI assistant SDK for Flutter. Build voice-powered apps with AI assistants, tool execution, and WebSocket streaming. No UI dependencies - integrate with any framework."
-version: 1.2.0
+description: "Complete Conversation AI Kit for Flutter. Build intelligent voice and text conversations with GPT-4, Azure Speech, and custom AI backends. Multi-modal AI SDK for production apps."
+version: 1.3.2
 homepage: https://github.com/voivihq/voivi_voice_ai
 repository: https://github.com/voivihq/voivi_voice_ai
 documentation: https://github.com/voivihq/voivi_voice_ai#readme
 issue_tracker: https://github.com/voivihq/voivi_voice_ai/issues
 
 topics:
-  - voice
-  - ai
-  - assistant
-  - speech
+  - conversation-ai
+  - conversational-ai
+  - voice-ai
+  - ai-assistant
+  - multimodal-ai
+  - chatbot
+  - speech-to-text
+  - text-to-speech
+  - gpt-4
   - websocket
   - real-time
-  - conversational-ai
-  - voice-bot
+  - flutter-sdk
   - voice-assistant
-  - voivi
+  - ai-chat
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
