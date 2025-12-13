@@ -154,7 +154,7 @@ class _ChatScreenState extends State<ChatScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.grey,
       ),
     );
   }
@@ -199,7 +199,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 height: 12,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: _isConnected ? Colors.green : Colors.red,
+                  color: _isConnected ? Colors.grey : Colors.grey,
                 ),
               ),
               const SizedBox(width: 8),
@@ -245,8 +245,8 @@ class _ChatScreenState extends State<ChatScreen> {
                 icon: const Icon(Icons.logout),
                 label: const Text('Disconnect'),
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: Colors.red,
-                  side: const BorderSide(color: Colors.red),
+                  foregroundColor: Colors.grey,
+                  side: const BorderSide(color: Colors.grey),
                 ),
               ),
             ),

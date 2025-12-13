@@ -90,7 +90,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
             const Icon(
               Icons.error_outline,
               size: 64,
-              color: Colors.red,
+              color: Colors.grey,
             ),
             const SizedBox(height: 16),
             Text(
@@ -220,7 +220,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0F3460),
+                    color: const Color(0xFFF5F5F5),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -265,7 +265,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
   void _showAssistantDetails(AssistantModel assistant) {
     showModalBottomSheet(
       context: context,
-      backgroundColor: const Color(0xFF16213E),
+      backgroundColor: const Color(0xFFFFFFFF),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -381,7 +381,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: const Color(0xFF0F3460),
+              color: const Color(0xFFF5F5F5),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: const Color(0xFF757575).withOpacity(0.3),

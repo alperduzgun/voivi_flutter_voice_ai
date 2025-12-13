@@ -28,7 +28,7 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: Color(0xFF0F3460),
+        color: Color(0xFFF5F5F5),
         border: Border(
           bottom: BorderSide(
             color: Color(0xFF757575),
@@ -176,10 +176,10 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F3460),
+        color: const Color(0xFFF5F5F5),
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: result.success ? Colors.green : Colors.red,
+          color: result.success ? Colors.grey : Colors.grey,
           width: 2,
         ),
       ),
@@ -190,7 +190,7 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
             children: [
               Icon(
                 result.success ? Icons.check_circle : Icons.error,
-                color: result.success ? Colors.green : Colors.red,
+                color: result.success ? Colors.grey : Colors.grey,
                 size: 16,
               ),
               const SizedBox(width: 8),
@@ -351,7 +351,7 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.grey,
       ),
     );
   }

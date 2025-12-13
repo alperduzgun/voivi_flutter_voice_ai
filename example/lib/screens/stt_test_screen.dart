@@ -192,7 +192,7 @@ class _STTTestScreenState extends State<STTTestScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.grey,
         duration: const Duration(seconds: 2),
       ),
     );
@@ -202,7 +202,7 @@ class _STTTestScreenState extends State<STTTestScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message),
-        backgroundColor: Colors.red,
+        backgroundColor: Colors.grey,
         duration: const Duration(seconds: 4),
       ),
     );
@@ -277,7 +277,7 @@ class _STTTestScreenState extends State<STTTestScreen> {
               children: [
                 Icon(
                   isConfigured ? Icons.check_circle : Icons.warning,
-                  color: isConfigured ? Colors.green : Colors.orange,
+                  color: isConfigured ? Colors.grey : Colors.grey,
                 ),
                 const SizedBox(width: 8),
                 Text(
@@ -299,7 +299,7 @@ class _STTTestScreenState extends State<STTTestScreen> {
               const SizedBox(height: 8),
               const Text(
                 '⚠️ Please update ConfigService with your credentials',
-                style: TextStyle(color: Colors.orange),
+                style: TextStyle(color: Colors.grey),
               ),
             ],
           ],
@@ -512,7 +512,7 @@ class _STTTestScreenState extends State<STTTestScreen> {
 
   Widget _buildErrorCard() {
     return Card(
-      color: Colors.red.shade50,
+      color: Colors.grey.shade50,
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -520,13 +520,13 @@ class _STTTestScreenState extends State<STTTestScreen> {
           children: [
             Row(
               children: [
-                Icon(Icons.error, color: Colors.red.shade700),
+                Icon(Icons.error, color: Colors.grey.shade700),
                 const SizedBox(width: 8),
                 Text(
                   'Error',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.red.shade700,
+                    color: Colors.grey.shade700,
                   ),
                 ),
               ],
@@ -534,7 +534,7 @@ class _STTTestScreenState extends State<STTTestScreen> {
             const SizedBox(height: 8),
             Text(
               _errorMessage!,
-              style: TextStyle(color: Colors.red.shade900),
+              style: TextStyle(color: Colors.grey.shade900),
             ),
           ],
         ),
@@ -663,7 +663,7 @@ class _STTTestScreenState extends State<STTTestScreen> {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: CircleAvatar(
-        backgroundColor: isPrimaryCustomer ? Colors.green : Colors.blue,
+        backgroundColor: isPrimaryCustomer ? Colors.grey : Colors.grey,
         child: Text(
           segment.speakerId.replaceAll('Person', 'P').replaceAll('Speaker', 'S'),
           style: const TextStyle(fontSize: 12),
@@ -688,7 +688,7 @@ class _STTTestScreenState extends State<STTTestScreen> {
               '👤 Primary Customer',
               style: TextStyle(
                 fontSize: 11,
-                color: Colors.green,
+                color: Colors.grey,
                 fontWeight: FontWeight.bold,
               ),
             ),

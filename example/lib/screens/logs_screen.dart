@@ -44,7 +44,7 @@ class _LogsScreenState extends State<LogsScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: Color(0xFF0F3460),
+        color: Color(0xFFF5F5F5),
         border: Border(
           bottom: BorderSide(
             color: Color(0xFF757575),
@@ -112,15 +112,15 @@ class _LogsScreenState extends State<LogsScreen> {
 
     switch (log.level) {
       case LogLevel.error:
-        levelColor = Colors.red;
+        levelColor = Colors.grey;
         levelIcon = Icons.error;
         break;
       case LogLevel.warning:
-        levelColor = Colors.orange;
+        levelColor = Colors.grey;
         levelIcon = Icons.warning;
         break;
       case LogLevel.info:
-        levelColor = Colors.blue;
+        levelColor = Colors.grey;
         levelIcon = Icons.info;
         break;
       case LogLevel.debug:
@@ -133,7 +133,7 @@ class _LogsScreenState extends State<LogsScreen> {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF0F3460),
+        color: const Color(0xFFF5F5F5),
         borderRadius: BorderRadius.circular(8),
         border: Border(
           left: BorderSide(

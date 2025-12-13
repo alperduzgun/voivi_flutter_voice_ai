@@ -236,8 +236,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   decoration: BoxDecoration(
                     color: ConfigService.isProduction
-                        ? Colors.orange
-                        : Colors.green,
+                        ? Colors.grey
+                        : Colors.grey,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Text(
@@ -389,7 +389,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const Row(
               children: [
-                Icon(Icons.flash_on, color: Color(0xFFFFD700)),
+                Icon(Icons.flash_on, color: Color(0xFF757575)),
                 SizedBox(width: 8),
                 Text(
                   'Quick Actions',
@@ -449,7 +449,7 @@ class _HomeScreenState extends State<HomeScreen> {
       avatar: Icon(icon, size: 18),
       label: Text(label),
       onPressed: onTap,
-      backgroundColor: const Color(0xFF0F3460),
+      backgroundColor: const Color(0xFFF5F5F5),
     );
   }
 }
