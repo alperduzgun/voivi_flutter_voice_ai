@@ -108,7 +108,7 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
+            color: const Color(0xFF6C63FF).withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(icon, color: const Color(0xFF6C63FF)),

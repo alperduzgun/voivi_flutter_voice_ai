@@ -5,6 +5,7 @@ import 'assistant_list_screen.dart';
 import 'chat_screen.dart';
 import 'tool_test_screen.dart';
 import 'logs_screen.dart';
+import 'stt_test_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -326,6 +327,11 @@ class _HomeScreenState extends State<HomeScreen> {
               'WebSocket-based messaging',
             ),
             _buildFeatureItem(
+              Icons.mic,
+              'Speech-to-Text',
+              'Transcribe audio with AI',
+            ),
+            _buildFeatureItem(
               Icons.build_circle,
               'Client-Side Tools',
               'Test in-process tool execution',
@@ -408,6 +414,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   Icons.chat,
                   'Start Chat',
                   () => setState(() => _selectedIndex = 2),
+                ),
+                _buildActionChip(
+                  Icons.mic,
+                  'Test STT',
+                  () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const STTTestScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _buildActionChip(
                   Icons.build,

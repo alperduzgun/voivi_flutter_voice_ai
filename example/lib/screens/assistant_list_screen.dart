@@ -178,7 +178,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
+                      color: const Color(0xFF6C63FF).withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Icon(
@@ -363,7 +363,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF6C63FF).withValues(alpha: 0.2),
+                  color: const Color(0xFF6C63FF).withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -384,7 +384,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
               color: const Color(0xFF0F3460),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: const Color(0xFF6C63FF).withValues(alpha: 0.3),
+                color: const Color(0xFF6C63FF).withOpacity(0.3),
               ),
             ),
             child: Column(
@@ -402,7 +402,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                         width: 20,
                         height: 20,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6C63FF).withValues(alpha: 0.2),
+                          color: const Color(0xFF6C63FF).withOpacity(0.2),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Center(

@@ -334,7 +334,7 @@ class _ChatScreenState extends State<ChatScreen> {
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.blue.withValues(alpha: 0.2),
+                      color: Colors.blue.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
@@ -385,7 +385,7 @@ class _ChatScreenState extends State<ChatScreen> {
             icon: const Icon(Icons.send),
             color: const Color(0xFF6C63FF),
             style: IconButton.styleFrom(
-              backgroundColor: const Color(0xFF6C63FF).withValues(alpha: 0.1),
+              backgroundColor: const Color(0xFF6C63FF).withOpacity(0.1),
             ),
           ),
         ],

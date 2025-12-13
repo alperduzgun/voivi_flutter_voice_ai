@@ -6,5 +6,6 @@ export 'src/services/websocket_service.dart';
 export 'src/services/tool_registry_service.dart';
 
 // Model exports
+export 'src/models/stt_models.dart';
 export 'src/models/summary_models.dart';
 export 'src/models/tool_definition_models.dart';

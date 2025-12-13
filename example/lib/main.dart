@@ -54,11 +54,11 @@ class VoiviChatExampleApp extends StatelessWidget {
             ),
           ),
         ),
-        cardTheme: CardThemeData(
-          color: const Color(0xFF16213E),
+        cardTheme: const CardTheme(
+          color: Color(0xFF16213E),
           elevation: 4,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
+            borderRadius: BorderRadius.all(Radius.circular(16)),
           ),
         ),
       ),
