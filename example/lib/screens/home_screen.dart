@@ -219,7 +219,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Row(
               children: [
-                const Icon(Icons.settings, color: Color(0xFF6C63FF)),
+                const Icon(Icons.settings, color: Color(0xFF757575)),
                 const SizedBox(width: 8),
                 const Text(
                   'Configuration',
@@ -304,7 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             const Row(
               children: [
-                Icon(Icons.star, color: Color(0xFF00D9FF)),
+                Icon(Icons.star, color: Color(0xFF757575)),
                 SizedBox(width: 8),
                 Text(
                   'Features',
@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
-          Icon(icon, color: const Color(0xFF6C63FF), size: 24),
+          Icon(icon, color: const Color(0xFF757575), size: 24),
           const SizedBox(width: 12),
           Expanded(
             child: Column(

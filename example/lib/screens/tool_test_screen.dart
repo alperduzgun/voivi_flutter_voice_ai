@@ -31,7 +31,7 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
         color: Color(0xFF0F3460),
         border: Border(
           bottom: BorderSide(
-            color: Color(0xFF6C63FF),
+            color: Color(0xFF757575),
             width: 2,
           ),
         ),
@@ -41,7 +41,7 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
         children: [
           const Row(
             children: [
-              Icon(Icons.build_circle, color: Color(0xFF6C63FF)),
+              Icon(Icons.build_circle, color: Color(0xFF757575)),
               SizedBox(width: 8),
               Text(
                 'Tool Testing',
@@ -108,10 +108,10 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
           width: 48,
           height: 48,
           decoration: BoxDecoration(
-            color: const Color(0xFF6C63FF).withOpacity(0.1),
+            color: const Color(0xFF757575).withOpacity(0.1),
             borderRadius: BorderRadius.circular(12),
           ),
-          child: Icon(icon, color: const Color(0xFF6C63FF)),
+          child: Icon(icon, color: const Color(0xFF757575)),
         ),
         title: Text(
           name,
@@ -126,7 +126,7 @@ class _ToolTestScreenState extends State<ToolTestScreen> {
               )
             : IconButton(
                 icon: const Icon(Icons.play_arrow),
-                color: const Color(0xFF6C63FF),
+                color: const Color(0xFF757575),
                 onPressed: onTest,
               ),
       ),

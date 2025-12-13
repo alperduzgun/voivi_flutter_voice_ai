@@ -47,14 +47,14 @@ class _LogsScreenState extends State<LogsScreen> {
         color: Color(0xFF0F3460),
         border: Border(
           bottom: BorderSide(
-            color: Color(0xFF6C63FF),
+            color: Color(0xFF757575),
             width: 2,
           ),
         ),
       ),
       child: Row(
         children: [
-          const Icon(Icons.article, color: Color(0xFF6C63FF)),
+          const Icon(Icons.article, color: Color(0xFF757575)),
           const SizedBox(width: 8),
           const Text(
             'Debug Logs',

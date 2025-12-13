@@ -178,12 +178,12 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                     width: 48,
                     height: 48,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF6C63FF).withOpacity(0.1),
+                      color: const Color(0xFF757575).withOpacity(0.1),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: const Icon(
                       Icons.smart_toy,
-                      color: Color(0xFF6C63FF),
+                      color: Color(0xFF757575),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -241,14 +241,14 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                     const Icon(
                       Icons.build_circle,
                       size: 16,
-                      color: Color(0xFF6C63FF),
+                      color: Color(0xFF757575),
                     ),
                     const SizedBox(width: 6),
                     Text(
                       '${assistant.toolIds!.length} Tools',
                       style: const TextStyle(
                         fontSize: 12,
-                        color: Color(0xFF6C63FF),
+                        color: Color(0xFF757575),
                         fontWeight: FontWeight.w600,
                       ),
                     ),
@@ -278,7 +278,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.smart_toy, color: Color(0xFF6C63FF)),
+                  const Icon(Icons.smart_toy, color: Color(0xFF757575)),
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
@@ -363,14 +363,14 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF6C63FF).withOpacity(0.2),
+                  color: const Color(0xFF757575).withOpacity(0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
                   '${toolIds.length}',
                   style: const TextStyle(
                     fontSize: 11,
-                    color: Color(0xFF6C63FF),
+                    color: Color(0xFF757575),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -384,7 +384,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
               color: const Color(0xFF0F3460),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
-                color: const Color(0xFF6C63FF).withOpacity(0.3),
+                color: const Color(0xFF757575).withOpacity(0.3),
               ),
             ),
             child: Column(
@@ -402,7 +402,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                         width: 20,
                         height: 20,
                         decoration: BoxDecoration(
-                          color: const Color(0xFF6C63FF).withOpacity(0.2),
+                          color: const Color(0xFF757575).withOpacity(0.2),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Center(
@@ -410,7 +410,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                             '${index + 1}',
                             style: const TextStyle(
                               fontSize: 11,
-                              color: Color(0xFF6C63FF),
+                              color: Color(0xFF757575),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -431,7 +431,7 @@ class _AssistantListScreenState extends State<AssistantListScreen> {
                         icon: const Icon(
                           Icons.copy,
                           size: 16,
-                          color: Color(0xFF6C63FF),
+                          color: Color(0xFF757575),
                         ),
                         onPressed: () {
                           // Copy to clipboard

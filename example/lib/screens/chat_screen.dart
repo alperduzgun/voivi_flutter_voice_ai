@@ -182,11 +182,11 @@ class _ChatScreenState extends State<ChatScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: Color(0xFF0F3460),
+        color: Color(0xFFF5F5F5),
         border: Border(
           bottom: BorderSide(
-            color: Color(0xFF6C63FF),
-            width: 2,
+            color: Color(0xFFE0E0E0),
+            width: 1,
           ),
         ),
       ),
@@ -304,9 +304,9 @@ class _ChatScreenState extends State<ChatScreen> {
         ),
         decoration: BoxDecoration(
           color: message.isUser
-              ? const Color(0xFF6C63FF)
-              : const Color(0xFF0F3460),
-          borderRadius: BorderRadius.circular(16),
+              ? const Color(0xFF757575)
+              : const Color(0xFFF5F5F5),
+          borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -334,14 +334,14 @@ class _ChatScreenState extends State<ChatScreen> {
                       vertical: 2,
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.2),
+                      color: Colors.grey.withOpacity(0.2),
                       borderRadius: BorderRadius.circular(4),
                     ),
                     child: Text(
                       message.type.split('.').last.toUpperCase(),
                       style: const TextStyle(
                         fontSize: 8,
-                        color: Colors.blue,
+                        color: Colors.grey,
                       ),
                     ),
                   ),
@@ -358,11 +358,11 @@ class _ChatScreenState extends State<ChatScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: Color(0xFF0F3460),
+        color: Color(0xFFF5F5F5),
         border: Border(
           top: BorderSide(
-            color: Color(0xFF6C63FF),
-            width: 2,
+            color: Color(0xFFE0E0E0),
+            width: 1,
           ),
         ),
       ),
@@ -383,9 +383,9 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             onPressed: _sendMessage,
             icon: const Icon(Icons.send),
-            color: const Color(0xFF6C63FF),
+            color: const Color(0xFF757575),
             style: IconButton.styleFrom(
-              backgroundColor: const Color(0xFF6C63FF).withOpacity(0.1),
+              backgroundColor: const Color(0xFF757575).withOpacity(0.1),
             ),
           ),
         ],
